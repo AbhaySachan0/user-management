@@ -1,7 +1,9 @@
 #ifndef FILE_H
 #define FILE_H
 
-void save_usr(char*, char*);
+#include "user.h"
+
+void save_usr_db(User *);
 void view_usr(void);
 
 #endif

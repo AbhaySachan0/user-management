@@ -18,6 +18,25 @@ int main() {
             pause_screen();
             break;
         
+        case 2:
+            show_login_screen();
+            // login_usr();
+            pause_screen();
+            break;
+
+        case 3:
+            show_view_users_screen();
+            view_usr();
+            pause_screen();
+            break;
+
+        case 4: 
+        
+            printf("Sure, you want to exit....");
+            pause_screen();
+            exit_screen();
+            return 0;
+            break;
         default:
             break;
         }

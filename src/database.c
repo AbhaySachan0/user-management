@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <sqlite3.h>
-#include "database.h"
+#include "../includes/database.h"
 
 void init_database(sqlite3 *db) {
     const char *sql =
