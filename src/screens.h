@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-/* ============================
-   Utility Functions
-   ============================ */
 
 void clear_screen(void) {
 #ifdef _WIN32
@@ -19,9 +17,6 @@ void pause_screen(void) {
     getchar();
 }
 
-/* ============================
-   Screen Layout Functions
-   ============================ */
 
 void show_menu_screen(void) {
     clear_screen();
@@ -60,4 +55,33 @@ void show_view_users_screen(void) {
     printf("====================================\n");
     printf("         REGISTERED USERS           \n");
     printf("====================================\n\n");
+}
+
+
+// void exit_screen(void) {
+
+//     printf("Exiting program .....\n\n");
+// }
+
+void exit_screen(void) {
+    clear_screen();
+
+    printf("\n");
+    printf("====================================================\n");
+    printf("                 EXITING SYSTEM                     \n");
+    printf("====================================================\n\n");
+
+    printf("Saving data");
+    fflush(stdout);
+
+    for(int i = 0; i < 3; i++) {
+        sleep(1);
+        printf(".");
+        fflush(stdout);
+    }
+
+    printf("\n\nSystem closed successfully.\n");
+    printf("Goodbye!\n\n");
+
+    sleep(1);
 }
