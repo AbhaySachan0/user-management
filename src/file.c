@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <sqlite3.h>
 
 #include "../includes/user.h"
@@ -46,6 +47,42 @@ void save_usr_db(User *user) {
 
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+}
+
+void load_user() {
+    sqlite3 *db;
+
+    if(sqlite3_open("user.db", &db)!=SQLITE_OK) {
+        printf("Cannot open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
+
+    const char *sql = "SELECT * FROM users";
+    sqlite3_stmt *stmt;
+    if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        printf("Failed to prepare statement:  %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
+    while(sqlite3_step(stmt) == SQLITE_ROW) {
+        ensure_capacity();
+
+        users[usr_count].id = sqlite3_column_int(stmt,0);
+        
+        strcpy(users[usr_count].username, (const char *)sqlite3_column_text(stmt, 1));
+        strcpy(users[usr_count].password, (const char *)sqlite3_column_text(stmt, 2));
+        strcpy(users[usr_count].role, (const char *)sqlite3_column_text(stmt, 3));
+        
+        users[usr_count].failed_attempts = sqlite3_column_int(stmt, 4);
+        users[usr_count].locked = sqlite3_column_int(stmt, 5);
+        
+        usr_count++;
+    }
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+
+    printf("Loaded %d users from database.\n",usr_count);
 }
 
 void view_usr() {

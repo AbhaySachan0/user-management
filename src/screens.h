@@ -19,7 +19,7 @@ void pause_screen(void) {
 
 
 void show_menu_screen(void) {
-    clear_screen();
+    // clear_screen();
 
     printf("====================================\n");
     printf("        USER MANAGEMENT SYSTEM      \n");
@@ -63,6 +63,19 @@ void show_view_users_screen(void) {
 //     printf("Exiting program .....\n\n");
 // }
 
+
+void loading_animation(const char *message, int seconds) {
+    printf("%s", message);
+    fflush(stdout);
+
+    for (int i = 0; i < seconds; i++) {
+        sleep(1);
+        printf(".");
+        fflush(stdout);
+    }
+    printf("\n");
+}
+
 void exit_screen(void) {
     clear_screen();
 
@@ -71,17 +84,16 @@ void exit_screen(void) {
     printf("                 EXITING SYSTEM                     \n");
     printf("====================================================\n\n");
 
-    printf("Saving data");
-    fflush(stdout);
+    loading_animation("  Saving user data", 2);
+    loading_animation("  Closing database connection", 2);
+    loading_animation("  Cleaning up resources", 2);
 
-    for(int i = 0; i < 3; i++) {
-        sleep(1);
-        printf(".");
-        fflush(stdout);
-    }
-
-    printf("\n\nSystem closed successfully.\n");
-    printf("Goodbye!\n\n");
+    printf("\n");
+    printf("  ---------------------------------------------------------\n");
+    printf("               SYSTEM CLOSED SUCCESSFULLY  ✓\n");
+    printf("                   Thank you for using it!\n");
+    printf("  ---------------------------------------------------------\n\n");
 
     sleep(1);
+    clear_screen();
 }

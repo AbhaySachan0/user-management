@@ -11,12 +11,14 @@ typedef struct {
     int locked;   // 0 -> unlocked , 1-> locked
 } User;
 
-extern User *user;
+extern User *users;
 extern int capacity;
 extern int usr_count;
 
+void init_users();
 void register_usr(void);
 int check_usr(char *);
 void display(void);
+void ensure_capacity();
 
 #endif

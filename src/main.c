@@ -6,6 +6,8 @@
 
 int main() {
     int option;
+    init_users();
+    load_user();
 
     while(1) {
         show_menu_screen();
@@ -31,9 +33,6 @@ int main() {
             break;
 
         case 4: 
-        
-            printf("Sure, you want to exit....");
-            pause_screen();
             exit_screen();
             return 0;
             break;
